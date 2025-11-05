@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+
+# Environment variables - CRITICAL: Never commit!
+.env
+.env.*
+!.env.production.example
+!.env.example
+
+# Credentials & Secrets - CRITICAL: Never commit!
+*.pem
+*.key
+*.cert
+config.json
+credentials.json
+
+# Docker Hub & Git credentials
+.docker/
+.git-credentials
+
+# Database & Data
+data/
+*.db
+*.sqlite
+*.sql
+postgres_data/
+
+# Uploads & User Data
+uploads/
+product_uploads/
+training_data/
+
+# Backups
+*.backup
+*.bak
+backup_*/
+*.tar.gz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

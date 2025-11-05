@@ -1,0 +1,132 @@
+# =============================================================================
+# Meal Planner - Production Docker Compose
+# =============================================================================
+# This compose file is designed for production deployment on external servers
+#
+# Usage:
+#   1. Copy this file to your server
+#   2. Create a .env file with your credentials
+#   3. Run: docker-compose -f docker-compose.production.yml up -d
+#
+# Requirements:
+#   - Docker 20.10+
+#   - Docker Compose 2.0+
+#   - .env file with credentials
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: meal-planner-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mealplanner}
+      POSTGRES_USER: ${POSTGRES_USER:-mealuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - meal-network
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mealuser} -d ${POSTGRES_DB:-mealplanner}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+    # Security: Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Application
+  app:
+    # Pull from Docker Hub - change version as needed
+    image: pamsler/wochenplaner:v0.1.0
+    container_name: meal-planner-app
+    restart: unless-stopped
+
+    ports:
+      - "${APP_PORT:-8570}:8570"
+
+    environment:
+      NODE_ENV: production
+      PORT: 8570
+      DATABASE_URL: postgresql://${POSTGRES_USER:-mealuser}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-mealplanner}
+
+      # Security - REQUIRED
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?ENCRYPTION_KEY must be set}
+
+      # Admin Account - REQUIRED
+      ADMIN_USERNAME: ${ADMIN_USERNAME:?ADMIN_USERNAME must be set}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?ADMIN_EMAIL must be set}
+
+      # Optional: External APIs
+      SPOONACULAR_API_KEY: ${SPOONACULAR_API_KEY:-}
+      EDAMAM_APP_ID: ${EDAMAM_APP_ID:-}
+      EDAMAM_APP_KEY: ${EDAMAM_APP_KEY:-}
+
+      # Optional: SSO Configuration
+      SSO_ENABLED: ${SSO_ENABLED:-false}
+      SSO_TENANT_ID: ${SSO_TENANT_ID:-}
+      SSO_CLIENT_ID: ${SSO_CLIENT_ID:-}
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET:-}
+      SSO_REDIRECT_URI: ${SSO_REDIRECT_URI:-}
+
+    volumes:
+      # Persistent storage for uploads and training data
+      - product_uploads:/app/uploads
+      - training_data:/app/data
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - meal-network
+
+    # Security: Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8570/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+# Persistent volumes
+volumes:
+  postgres_data:
+    driver: local
+  product_uploads:
+    driver: local
+  training_data:
+    driver: local
+
+# Network
+networks:
+  meal-network:
+    driver: bridge
