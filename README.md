@@ -1,111 +1,97 @@
-# 🍽️ Meal Planner (Wochenplaner)
+# 🍽️ Wochenplaner - Deployment
 
-Smart meal planning and shopping list application with SSO support, built with Node.js, React, and PostgreSQL.
+Smart meal planning and shopping list application.
 
 [![Docker Image](https://img.shields.io/badge/docker-pamsler%2Fwochenplaner-blue)](https://hub.docker.com/r/pamsler/wochenplaner)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-25.1-green.svg)](https://nodejs.org)
-[![PostgreSQL](https://img.shields.io/badge/postgresql-16-blue.svg)](https://www.postgresql.org)
-
-## ✨ Features
-
-- 📅 **Weekly Meal Planning** - Plan your meals for the entire week
-- 🛒 **Smart Shopping Lists** - Automatically generate shopping lists from meals
-- 👥 **Multi-User Support** - Family-friendly with user management
-- 🔐 **SSO Integration** - Optional Azure EntraID/Microsoft 365 authentication
-- 📱 **Responsive Design** - Works on desktop, tablet, and mobile
-- 🌙 **Dark Mode** - Easy on the eyes
-- 📊 **Activity Tracking** - See what your family is planning
-- 🔄 **Real-time Sync** - Changes sync across all devices
-- 🔍 **External Recipe APIs** - Integration with Spoonacular and Edamam
-
-## 🏗️ Architecture
-
-- **Frontend:** React 18 + TypeScript + Vite 6 + TailwindCSS
-- **Backend:** Node.js 25 + Express
-- **Database:** PostgreSQL 16
-- **Authentication:** JWT + Optional SSO (Azure EntraID)
-- **Container:** Multi-stage Docker build, SHA256 pinned, Multi-arch (amd64/arm64)
-- **Security:** Supply chain attestation (SBOM + Provenance)
 
 ## 🚀 Quick Start
 
-### Option 1: Docker Compose (Recommended)
-
-```bash
-# Clone the repository
-git clone https://github.com/pamsler/meal-planner.git
-cd meal-planner
-
-# Copy environment file
-cp .env.example .env
-
-# Edit .env and fill in your values
-nano .env
-
-# Generate secrets
-openssl rand -base64 32  # JWT_SECRET
-openssl rand -hex 32     # ENCRYPTION_KEY
-
-# Start the application
-docker-compose up -d
-```
-
-Access the application at: `http://localhost:8570`
-
-### Option 2: Production Deployment
-
-Pull the pre-built image from Docker Hub:
-
-```bash
-# Download production files
-curl -o docker-compose.production.yml https://raw.githubusercontent.com/pamsler/meal-planner/main/docker-compose.production.yml
-curl -o .env.example https://raw.githubusercontent.com/pamsler/meal-planner/main/.env.production.example
-
-# Configure
-cp .env.example .env
-nano .env
-
-# Start
-docker-compose -f docker-compose.production.yml up -d
-```
-
-See [Production Deployment Guide](PRODUCTION_DEPLOYMENT.md) for detailed instructions.
-
-## 📋 Requirements
+### Prerequisites
 
 - Docker 20.10+
 - Docker Compose 2.0+
-- 512MB RAM minimum
-- PostgreSQL 16 (included in docker-compose)
 
-## 🔧 Configuration
+### Installation
 
-### Required Environment Variables
+1. **Download the deployment files:**
 
-```env
-# Database
-DATABASE_URL=postgresql://mealuser:YOUR_PASSWORD@postgres:5432/mealplanner
-
-# Security - CRITICAL!
-JWT_SECRET=your_jwt_secret_here
-ENCRYPTION_KEY=your_encryption_key_here
-
-# Admin Account
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=your_admin_password
-ADMIN_EMAIL=admin@example.com
+```bash
+curl -o docker-compose.production.yml https://raw.githubusercontent.com/pamsler/wochenplaner/main/docker-compose.production.yml
+curl -o .env https://raw.githubusercontent.com/pamsler/wochenplaner/main/.env.production.example
 ```
 
-### Optional Features
+2. **Configure your environment:**
+
+```bash
+# Edit .env file with your values
+nano .env
+```
+
+**Generate required secrets:**
+```bash
+# JWT Secret
+openssl rand -base64 32
+
+# Encryption Key
+openssl rand -hex 32
+```
+
+**Minimum required configuration:**
+```env
+POSTGRES_PASSWORD=YourStrongDatabasePassword
+JWT_SECRET=YourGeneratedJWTSecret
+ENCRYPTION_KEY=YourGeneratedEncryptionKey
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=YourStrongAdminPassword
+ADMIN_EMAIL=admin@yourdomain.com
+```
+
+3. **Start the application:**
+
+```bash
+docker-compose -f docker-compose.production.yml up -d
+```
+
+4. **Access the application:**
+
+Open your browser: `http://localhost:8570`
+
+Default login:
+- Username: `admin` (or the value you set in ADMIN_USERNAME)
+- Password: Your ADMIN_PASSWORD
+
+## 📦 Docker Image
+
+Pre-built images are available on Docker Hub:
+
+```bash
+docker pull pamsler/wochenplaner:v0.1.0
+docker pull pamsler/wochenplaner:latest
+```
+
+**Image Features:**
+- Multi-architecture support (amd64/arm64)
+- SHA256 pinned base images
+- Supply chain attestation (SBOM + Provenance)
+- Security: Non-root user, health checks
+
+## 🔧 Optional Features
+
+### External Recipe APIs
+
+Add to your `.env` file:
 
 ```env
-# External Recipe APIs
-SPOONACULAR_API_KEY=your_api_key_here
-EDAMAM_APP_ID=your_app_id_here
-EDAMAM_APP_KEY=your_app_key_here
+SPOONACULAR_API_KEY=your_api_key
+EDAMAM_APP_ID=your_app_id
+EDAMAM_APP_KEY=your_app_key
+```
 
-# Azure EntraID SSO
+### Azure EntraID SSO
+
+Add to your `.env` file:
+
+```env
 SSO_ENABLED=true
 SSO_TENANT_ID=your_tenant_id
 SSO_CLIENT_ID=your_client_id
@@ -113,140 +99,80 @@ SSO_CLIENT_SECRET=your_client_secret
 SSO_REDIRECT_URI=https://yourdomain.com/auth/callback
 ```
 
-See [.env.production.example](.env.production.example) for all available options.
+## 🔄 Updates
 
-## 🛠️ Development
-
-### Local Development Setup
+To update to the latest version:
 
 ```bash
-# Install dependencies
-cd frontend && npm install
-cd ../backend && npm install
+# Pull the latest image
+docker-compose -f docker-compose.production.yml pull
 
-# Start backend (terminal 1)
-cd backend
-npm run dev
+# Restart with new image
+docker-compose -f docker-compose.production.yml up -d
 
-# Start frontend (terminal 2)
-cd frontend
-npm run dev
+# Clean up old images
+docker image prune -a
 ```
 
-### Project Structure
+## 🔒 Reverse Proxy (Recommended)
 
+For production use with SSL, configure a reverse proxy (nginx/traefik) in front of the application.
+
+**Example nginx configuration:**
+
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name yourdomain.com;
+
+    ssl_certificate /path/to/fullchain.pem;
+    ssl_certificate_key /path/to/privkey.pem;
+
+    location / {
+        proxy_pass http://localhost:8570;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
 ```
-meal-planner/
-├── frontend/              # React TypeScript frontend
-│   ├── src/
-│   │   ├── components/   # Reusable UI components
-│   │   ├── pages/        # Page components
-│   │   ├── api/          # API client functions
-│   │   └── types/        # TypeScript types
-│   └── package.json
-├── backend/              # Node.js Express backend
-│   ├── src/
-│   │   ├── routes/       # API routes
-│   │   ├── services/     # Business logic
-│   │   └── server.js     # Main server file
-│   └── package.json
-├── Dockerfile            # Multi-stage Docker build
-├── docker-compose.yml    # Development compose
-└── docker-compose.production.yml  # Production compose
-```
 
-## 🐳 Docker Hub
+## 📊 Maintenance
 
-Pre-built images are available on Docker Hub:
+### Backup
 
 ```bash
-docker pull pamsler/wochenplaner:v0.1.0
-# or
-docker pull pamsler/wochenplaner:latest
+# Database backup
+docker exec meal-planner-db pg_dump -U mealuser mealplanner > backup_$(date +%Y%m%d).sql
+
+# Restore
+cat backup.sql | docker exec -i meal-planner-db psql -U mealuser -d mealplanner
 ```
 
-**Image Features:**
-- ✅ Multi-architecture (linux/amd64, linux/arm64)
-- ✅ SHA256 pinned base images
-- ✅ Supply chain attestation (SBOM + Provenance)
-- ✅ Non-root user (UID 1001)
-- ✅ Health checks included
-- ✅ Alpine-based for minimal size
-
-See [DOCKER_HUB_README.md](DOCKER_HUB_README.md) for more details.
-
-## 🔒 Security
-
-- **Non-root User**: Container runs as unprivileged user (UID 1001)
-- **SHA256 Pinned**: Base images are pinned to specific SHA256 hashes
-- **No Secrets in Image**: All sensitive data via environment variables
-- **Supply Chain**: SBOM and Provenance attestation included
-- **Health Checks**: Built-in container health monitoring
-- **HTTPS Ready**: Reverse proxy configuration included
-
-## 📖 Documentation
-
-- [Production Deployment Guide](PRODUCTION_DEPLOYMENT.md)
-- [Docker Optimization Summary](DOCKER_OPTIMIZATION_SUMMARY.md)
-- [Docker Hub README](DOCKER_HUB_README.md)
-- [Environment Variables](.env.production.example)
-
-## 🚢 Deployment Scripts
-
-### Push to Docker Hub
+### View Logs
 
 ```bash
-./push-to-dockerhub.sh v0.1.0
+# All logs
+docker-compose -f docker-compose.production.yml logs -f
+
+# Only app logs
+docker-compose -f docker-compose.production.yml logs -f app
 ```
 
-**Note:** Fill in your Docker Hub credentials in the script first.
-
-### Push to GitHub
+### Health Check
 
 ```bash
-./push-to-github.sh
+curl http://localhost:8570/api/health
 ```
 
-The script will:
-- Initialize Git repository
-- Perform security checks (no credentials)
-- Ask for your GitHub repository URL
-- Show files to be committed
-- Create commit and push
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Credits
-
-Developed by [AmslerTec](mailto:pascal.amsler@amslertec.ch)
+Expected response: `{"status":"ok"}`
 
 ## 📞 Support
 
 - 📧 Email: pascal.amsler@amslertec.ch
-- 🐛 Issues: [GitHub Issues](https://github.com/pamsler/meal-planner/issues)
-
-## 🗺️ Roadmap
-
-- [ ] Mobile app (React Native)
-- [ ] Recipe scraping from URLs
-- [ ] Meal plan templates
-- [ ] Nutrition tracking
-- [ ] Shopping list sharing
-- [ ] Barcode scanning
-- [ ] Calendar integration
+- 🐳 Docker Hub: https://hub.docker.com/r/pamsler/wochenplaner
 
 ---
 
-Made with ❤️ for better meal planning
+© 2024 AmslerTec - Made with ❤️ for better meal planning
