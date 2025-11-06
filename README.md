@@ -70,7 +70,7 @@ docker pull pamsler/wochenplaner:latest
 ```
 
 **Image Features:**
-- Multi-architecture support (amd64/arm64)
+- Platform: linux/amd64
 - SHA256 pinned base images
 - Supply chain attestation (SBOM + Provenance)
 - Security: Non-root user, health checks
