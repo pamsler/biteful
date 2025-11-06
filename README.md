@@ -1,8 +1,8 @@
-# 🍽️ Wochenplaner - Deployment
+# 🍽️ Biteful - Smart Meal Planning
 
-Smart meal planning and shopping list application.
+Biteful - Your intelligent meal planning companion with AI-powered recipe suggestions and multi-language support.
 
-[![Docker Image](https://img.shields.io/badge/docker-pamsler%2Fwochenplaner-blue)](https://hub.docker.com/r/pamsler/wochenplaner)
+[![Docker Image](https://img.shields.io/badge/docker-pamsler%2Fbiteful-blue)](https://hub.docker.com/r/pamsler/biteful)
 
 ## 🚀 Quick Start
 
@@ -16,8 +16,8 @@ Smart meal planning and shopping list application.
 1. **Download the deployment files:**
 
 ```bash
-curl -o docker-compose.production.yml https://raw.githubusercontent.com/pamsler/wochenplaner/main/docker-compose.production.yml
-curl -o .env https://raw.githubusercontent.com/pamsler/wochenplaner/main/.env.production.example
+curl -o docker-compose.production.yml https://raw.githubusercontent.com/pamsler/biteful/main/docker-compose.production.yml
+curl -o .env https://raw.githubusercontent.com/pamsler/biteful/main/.env.production.example
 ```
 
 2. **Configure your environment:**
@@ -65,8 +65,8 @@ Default login:
 Pre-built images are available on Docker Hub:
 
 ```bash
-docker pull pamsler/wochenplaner:v0.1.0
-docker pull pamsler/wochenplaner:latest
+docker pull pamsler/biteful:v0.1.0
+docker pull pamsler/biteful:latest
 ```
 
 **Image Features:**
@@ -96,10 +96,10 @@ docker image prune -a
 
 ```bash
 # Database backup
-docker exec wochenplaner-db pg_dump -U mealuser mealplanner > backup_$(date +%Y%m%d).sql
+docker exec biteful-db pg_dump -U mealuser mealplanner > backup_$(date +%Y%m%d).sql
 
 # Restore
-cat backup.sql | docker exec -i wochenplaner-db psql -U mealuser -d mealplanner
+cat backup.sql | docker exec -i biteful-db psql -U mealuser -d mealplanner
 ```
 
 ### View Logs
@@ -120,10 +120,25 @@ curl http://localhost:8570/api/health
 
 Expected response: `{"status":"ok"}`
 
+## 🌍 Multi-Language Support
+
+Biteful supports multiple languages out of the box:
+- 🇩🇪 **Deutsch** (German) - Default
+- 🇬🇧 **English**
+
+**Features:**
+- Automatic language detection based on browser settings
+- Language toggle in the sidebar with flag icons
+- User preference saved in browser (localStorage)
+- Instant language switching without page reload
+- Easy to extend with additional languages
+
+Users can switch languages at any time using the language toggle button at the bottom of the sidebar.
+
 ## 📞 Support
 
 - 📧 Email: support@amslertec.ch
-- 🐳 Docker Hub: https://hub.docker.com/r/pamsler/wochenplaner
+- 🐳 Docker Hub: https://hub.docker.com/r/pamsler/biteful
 
 ---
 

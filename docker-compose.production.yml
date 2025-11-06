@@ -1,5 +1,5 @@
 # =============================================================================
-# Wochenplaner - Production Docker Compose
+# Biteful - Production Docker Compose
 # =============================================================================
 # This compose file is designed for production deployment on external servers
 #
@@ -20,7 +20,7 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
-    container_name: wochenplaner-db
+    container_name: biteful-db
     restart: unless-stopped
 
     environment:
@@ -32,7 +32,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
     networks:
-      - wochenplaner-network
+      - biteful-network
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mealuser} -d ${POSTGRES_DB:-mealplanner}"]
@@ -54,8 +54,8 @@ services:
   # Application
   app:
     # Pull from Docker Hub - change version as needed
-    image: pamsler/wochenplaner:v0.1.0
-    container_name: wochenplaner-app
+    image: pamsler/biteful:v0.1.0
+    container_name: biteful-app
     restart: unless-stopped
 
     ports:
@@ -85,7 +85,7 @@ services:
         condition: service_healthy
 
     networks:
-      - wochenplaner-network
+      - biteful-network
 
     # Security: Resource limits
     deploy:
@@ -116,5 +116,5 @@ volumes:
 
 # Network
 networks:
-  wochenplaner-network:
+  biteful-network:
     driver: bridge
