@@ -120,6 +120,16 @@ curl http://localhost:8570/api/health
 
 Expected response: `{"status":"ok"}`
 
+## ✨ Key Features
+
+- 📅 **Weekly Meal Planning** - Plan all meals for the week
+- 🛒 **Smart Shopping Lists** - Auto-generated from meal plans
+- 👥 **User Management** - Last login tracking & admin controls
+- 📧 **Email Notifications** - Configurable daily/weekly reminders
+- 🤖 **AI-Powered** - Claude AI and OpenAI integration
+- 🔐 **Secure** - JWT authentication with encryption
+- 🌍 **Multi-Language** - German 🇩🇪 and English 🇬🇧
+
 ## 🌍 Multi-Language Support
 
 Biteful supports multiple languages out of the box:
