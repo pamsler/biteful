@@ -122,7 +122,7 @@ Expected response: `{"status":"ok"}`
 
 ## 📞 Support
 
-- 📧 Email: pascal.amsler@amslertec.ch
+- 📧 Email: support@amslertec.ch
 - 🐳 Docker Hub: https://hub.docker.com/r/pamsler/wochenplaner
 
 ---
