@@ -1,5 +1,5 @@
 # =============================================================================
-# Meal Planner - Production Docker Compose
+# Wochenplaner - Production Docker Compose
 # =============================================================================
 # This compose file is designed for production deployment on external servers
 #
@@ -20,7 +20,7 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
-    container_name: meal-planner-db
+    container_name: wochenplaner-db
     restart: unless-stopped
 
     environment:
@@ -32,7 +32,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
     networks:
-      - meal-network
+      - wochenplaner-network
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mealuser} -d ${POSTGRES_DB:-mealplanner}"]
@@ -55,7 +55,7 @@ services:
   app:
     # Pull from Docker Hub - change version as needed
     image: pamsler/wochenplaner:v0.1.0
-    container_name: meal-planner-app
+    container_name: wochenplaner-app
     restart: unless-stopped
 
     ports:
@@ -75,18 +75,6 @@ services:
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set}
       ADMIN_EMAIL: ${ADMIN_EMAIL:?ADMIN_EMAIL must be set}
 
-      # Optional: External APIs
-      SPOONACULAR_API_KEY: ${SPOONACULAR_API_KEY:-}
-      EDAMAM_APP_ID: ${EDAMAM_APP_ID:-}
-      EDAMAM_APP_KEY: ${EDAMAM_APP_KEY:-}
-
-      # Optional: SSO Configuration
-      SSO_ENABLED: ${SSO_ENABLED:-false}
-      SSO_TENANT_ID: ${SSO_TENANT_ID:-}
-      SSO_CLIENT_ID: ${SSO_CLIENT_ID:-}
-      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET:-}
-      SSO_REDIRECT_URI: ${SSO_REDIRECT_URI:-}
-
     volumes:
       # Persistent storage for uploads and training data
       - product_uploads:/app/uploads
@@ -97,7 +85,7 @@ services:
         condition: service_healthy
 
     networks:
-      - meal-network
+      - wochenplaner-network
 
     # Security: Resource limits
     deploy:
@@ -128,5 +116,5 @@ volumes:
 
 # Network
 networks:
-  meal-network:
+  wochenplaner-network:
     driver: bridge

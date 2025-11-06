@@ -75,30 +75,6 @@ docker pull pamsler/wochenplaner:latest
 - Supply chain attestation (SBOM + Provenance)
 - Security: Non-root user, health checks
 
-## 🔧 Optional Features
-
-### External Recipe APIs
-
-Add to your `.env` file:
-
-```env
-SPOONACULAR_API_KEY=your_api_key
-EDAMAM_APP_ID=your_app_id
-EDAMAM_APP_KEY=your_app_key
-```
-
-### Azure EntraID SSO
-
-Add to your `.env` file:
-
-```env
-SSO_ENABLED=true
-SSO_TENANT_ID=your_tenant_id
-SSO_CLIENT_ID=your_client_id
-SSO_CLIENT_SECRET=your_client_secret
-SSO_REDIRECT_URI=https://yourdomain.com/auth/callback
-```
-
 ## 🔄 Updates
 
 To update to the latest version:
@@ -114,40 +90,16 @@ docker-compose -f docker-compose.production.yml up -d
 docker image prune -a
 ```
 
-## 🔒 Reverse Proxy (Recommended)
-
-For production use with SSL, configure a reverse proxy (nginx/traefik) in front of the application.
-
-**Example nginx configuration:**
-
-```nginx
-server {
-    listen 443 ssl http2;
-    server_name yourdomain.com;
-
-    ssl_certificate /path/to/fullchain.pem;
-    ssl_certificate_key /path/to/privkey.pem;
-
-    location / {
-        proxy_pass http://localhost:8570;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-
 ## 📊 Maintenance
 
 ### Backup
 
 ```bash
 # Database backup
-docker exec meal-planner-db pg_dump -U mealuser mealplanner > backup_$(date +%Y%m%d).sql
+docker exec wochenplaner-db pg_dump -U mealuser mealplanner > backup_$(date +%Y%m%d).sql
 
 # Restore
-cat backup.sql | docker exec -i meal-planner-db psql -U mealuser -d mealplanner
+cat backup.sql | docker exec -i wochenplaner-db psql -U mealuser -d mealplanner
 ```
 
 ### View Logs
@@ -175,4 +127,4 @@ Expected response: `{"status":"ok"}`
 
 ---
 
-© 2024 AmslerTec - Made with ❤️ for better meal planning
+© 2025 AmslerTec - Made with ❤️ for better meal planning
