@@ -25,7 +25,7 @@ set -e  # Exit on error
 
 # Docker Hub credentials - FILL IN YOUR VALUES
 DOCKER_USERNAME="pamsler"
-DOCKER_PASSWORD="dckr_pat_y38xuy-aY7F6g_aRfLPTK9MoHfw"  # Or use Docker access token (recommended)
+DOCKER_PASSWORD="YOUR_DOCKERHUB_PASSWORD"  # Or use Docker access token (recommended)
 
 # Image configuration
 IMAGE_NAME="biteful"

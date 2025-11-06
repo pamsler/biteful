@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =============================================================================
-# Meal Planner - GitHub Push Script
+# Biteful - GitHub Push Script
 # =============================================================================
 # This script safely pushes your project to GitHub
 #
@@ -146,8 +146,8 @@ get_github_url() {
 
     echo ""
     echo "Enter your GitHub repository URL:"
-    echo "Example: https://github.com/pamsler/meal-planner.git"
-    echo "      or git@github.com:pamsler/meal-planner.git"
+    echo "Example: https://github.com/pamsler/biteful.git"
+    echo "      or git@github.com:pamsler/biteful.git"
     echo ""
     read -p "GitHub URL: " GITHUB_URL
 
@@ -195,10 +195,10 @@ create_commit() {
     read -p "Message: " commit_message
 
     if [ -z "$commit_message" ]; then
-        commit_message="Initial commit - Meal Planner v0.1.0
+        commit_message="Initial commit - Biteful v0.1.0
 
 - Complete meal planning application
-- Docker containerized (multi-arch: amd64/arm64)
+- Docker containerized (linux/amd64)
 - PostgreSQL database
 - React frontend with TypeScript
 - Node.js backend
@@ -277,7 +277,7 @@ display_summary() {
 
 main() {
     echo ""
-    print_header "Meal Planner - GitHub Push"
+    print_header "Biteful - GitHub Push"
     echo ""
 
     # Pre-flight checks
