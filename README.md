@@ -145,9 +145,6 @@ Biteful supports multiple languages out of the box:
 
 Users can switch languages at any time using the language toggle button at the bottom of the sidebar.
 
-## 📞 Support
-
-- 📧 Email: support@amslertec.ch
 - 🐳 Docker Hub: https://hub.docker.com/r/pamsler/biteful
 
 ---
