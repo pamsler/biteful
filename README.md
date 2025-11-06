@@ -125,9 +125,11 @@ Expected response: `{"status":"ok"}`
 - 📅 **Weekly Meal Planning** - Plan all meals for the week
 - 🛒 **Smart Shopping Lists** - Auto-generated from meal plans
 - 👥 **User Management** - Last login tracking & admin controls
+- 🔐 **Multi-Factor Authentication (MFA)** - TOTP-based 2FA for local users with backup codes
+- 👤 **User Profiles** - Dedicated profile page with account and security settings
 - 📧 **Email Notifications** - Configurable daily/weekly reminders
 - 🤖 **AI-Powered** - Claude AI and OpenAI integration
-- 🔐 **Secure** - JWT authentication with encryption
+- 🔒 **Secure** - JWT authentication with encryption
 - 🌍 **Multi-Language** - German 🇩🇪 and English 🇬🇧
 
 ## 🌍 Multi-Language Support
