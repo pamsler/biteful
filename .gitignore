@@ -1,31 +1,19 @@
-# Node modules
-node_modules/
-npm-debug.log*
+# ============================================================================
+# Biteful - GitHub Repository Configuration
+# ============================================================================
+# This repository only contains deployment configuration files.
+# All source code remains private and is only distributed via Docker Hub.
+#
+# Public files:
+#   - .env.production.example (environment variables template)
+#   - docker-compose.production.yml (Docker deployment configuration)
+# ============================================================================
 
-# Environment variables
-.env
-.env.local
-.env.production
+# Ignore everything by default
+*
+*/
 
-# Database
-*.db
-*.db-*
-
-# Uploads
-uploads/
-data/
-
-# Logs
-logs/
-*.log
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Docker
-*.tar
+# Allow only specific deployment files
+!.gitignore
+!.env.production.example
+!docker-compose.production.yml
