@@ -60,13 +60,20 @@ Default login:
 - Username: `admin` (or the value you set in ADMIN_USERNAME)
 - Password: Your ADMIN_PASSWORD
 
-## 📦 Docker Image
+## 📦 Docker Images
 
 Pre-built images are available on Docker Hub:
 
+**Application Image:**
 ```bash
-docker pull pamsler/biteful:v0.1.5
+docker pull pamsler/biteful:v0.1.6
 docker pull pamsler/biteful:latest
+```
+
+**Database Image:**
+```bash
+docker pull pamsler/biteful-db:v0.1.6
+docker pull pamsler/biteful-db:latest
 ```
 
 **Image Features:**
@@ -74,6 +81,7 @@ docker pull pamsler/biteful:latest
 - SHA256 pinned base images
 - Supply chain attestation (SBOM + Provenance)
 - Security: Non-root user, health checks
+- Custom PostgreSQL 16 Alpine database image
 
 ## 🔄 Updates
 
