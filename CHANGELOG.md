@@ -5,6 +5,34 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2025-01-08
+
+### Added
+- 🐳 **Custom Database Image** - Separate PostgreSQL 16 Alpine image
+  - `pamsler/biteful-db` on Docker Hub
+  - PostgreSQL contrib extensions included
+  - UTF-8 locale support
+  - Health checks configured
+  - SBOM and Provenance attestation
+- 🎨 **UI Color Improvements**
+  - Cancel/Abbrechen buttons now red for better visibility
+  - Backup code buttons (Download/Copy) now green
+  - Local authentication badge now green (SSO stays blue)
+  - Consistent color scheme across profile and MFA settings
+
+### Changed
+- Docker deployment now uses two separate images:
+  - Application: `pamsler/biteful:v0.1.6`
+  - Database: `pamsler/biteful-db:v0.1.6`
+- Updated `push-to-dockerhub.sh` to build and push both images
+- Updated all documentation for dual-image deployment
+
+### Infrastructure
+- New database image: `pamsler/biteful-db`
+- Both images available on Docker Hub
+- Platform: `linux/amd64`
+- Database base: `postgres:16-alpine`
+
 ## [0.1.5] - 2025-01-07
 
 ### Added
@@ -157,6 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor** (0.x.0): New features, backwards compatible
 - **Patch** (0.0.x): Bug fixes, backwards compatible
 
+[0.1.6]: https://github.com/pamsler/biteful/releases/tag/v0.1.6
 [0.1.5]: https://github.com/pamsler/biteful/releases/tag/v0.1.5
 [0.1.4]: https://github.com/pamsler/biteful/releases/tag/v0.1.4
 [0.1.3]: https://github.com/pamsler/biteful/releases/tag/v0.1.3
