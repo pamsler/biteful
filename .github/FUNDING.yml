@@ -1,0 +1,7 @@
+# GitHub Sponsors configuration for Biteful
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button
+
+# Custom funding links
+custom:
+  - "mailto:support@amslertec.ch"
+  - "https://hub.docker.com/r/pamsler/biteful"
