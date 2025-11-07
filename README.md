@@ -65,7 +65,7 @@ Default login:
 Pre-built images are available on Docker Hub:
 
 ```bash
-docker pull pamsler/biteful:v0.1.4
+docker pull pamsler/biteful:v0.1.5
 docker pull pamsler/biteful:latest
 ```
 
@@ -132,6 +132,7 @@ Expected response: `{"status":"ok"}`
   - Configure via Settings → Security tab
   - Supports multiple passkeys per user
 - 👤 **User Profiles** - Dedicated profile page with account and security settings
+- 🖼️ **Profile Pictures** - Upload custom profile pictures (local users) or auto-sync from Microsoft Entra ID (SSO users)
 - 📧 **Email Notifications** - Configurable daily/weekly reminders
 - 🤖 **AI-Powered** - Claude AI and OpenAI integration
 - 🔒 **Secure** - JWT authentication with encryption

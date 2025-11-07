@@ -5,6 +5,64 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5] - 2025-01-07
+
+### Added
+- 🔧 **Database-Driven Passkey Configuration** - Passkey settings now stored in database
+  - New **Settings → Security** tab for configuring WebAuthn settings
+  - Configure RP ID, RP Name, and Origin via admin UI
+  - No environment variables required anymore
+  - Runtime configuration without container restart
+  - Settings validation before saving
+- 🗄️ **Database Updates**
+  - Added `passkey_settings` table
+  - Default values: localhost, Biteful, http://localhost:8570
+
+### Changed
+- Passkey configuration moved from environment variables to database
+- `PASSKEY_RP_ID` and `PASSKEY_ORIGIN` environment variables now optional (fallback only)
+- Settings page now has dedicated Security tab
+- All passkey routes now fetch configuration from database
+
+### Improved
+- Simpler production deployment - no need to set passkey ENV vars
+- Better user experience with UI-based configuration
+- More flexible configuration management
+
+## [0.1.4] - 2025-01-07
+
+### Added
+- 🔑 **Passkey Support (WebAuthn)** - Passwordless biometric authentication
+  - Fingerprint and face recognition login
+  - Platform authenticator support (Windows Hello, Touch ID, Face ID)
+  - Multiple passkey credentials per user
+  - Passkey registration with optional credential naming
+  - Mutually exclusive with MFA (only one security method active at a time)
+  - Only available for local users (not SSO)
+  - Browser support detection
+- 🔐 **Enhanced Security Integration**
+  - Automatic MFA disable when passkey is enabled
+  - Automatic passkey disable when MFA is enabled
+  - Warning messages in both MFA and Passkey settings
+  - Passkey login option on login page
+- 🗄️ **Database Updates**
+  - Added `passkey_enabled` column
+  - Added `passkey_credentials` JSONB array for multiple credentials
+  - Added `passkey_challenge` for authentication flow
+- 🌐 **WebAuthn Configuration**
+  - `PASSKEY_RP_ID` environment variable for Relying Party ID
+  - `PASSKEY_ORIGIN` environment variable for origin validation
+
+### Changed
+- Profile Security tab now shows both MFA and Passkey settings
+- Login page shows "Sign in with Passkey" button when username is entered
+- Updated all translations (German and English) with passkey strings
+
+### Technical
+- Backend: `@simplewebauthn/server` v10.0.1
+- Frontend: `@simplewebauthn/browser` v10.0.0
+- W3C WebAuthn Level 2 compliant
+
 ## [0.1.3] - 2025-01-06
 
 ### Added
@@ -99,6 +157,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor** (0.x.0): New features, backwards compatible
 - **Patch** (0.0.x): Bug fixes, backwards compatible
 
+[0.1.5]: https://github.com/pamsler/biteful/releases/tag/v0.1.5
+[0.1.4]: https://github.com/pamsler/biteful/releases/tag/v0.1.4
 [0.1.3]: https://github.com/pamsler/biteful/releases/tag/v0.1.3
 [0.1.2]: https://github.com/pamsler/biteful/releases/tag/v0.1.2
 [0.1.1]: https://github.com/pamsler/biteful/releases/tag/v0.1.1
