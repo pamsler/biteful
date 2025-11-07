@@ -65,7 +65,7 @@ Default login:
 Pre-built images are available on Docker Hub:
 
 ```bash
-docker pull pamsler/biteful:v0.1.3
+docker pull pamsler/biteful:v0.1.4
 docker pull pamsler/biteful:latest
 ```
 
@@ -126,6 +126,11 @@ Expected response: `{"status":"ok"}`
 - 🛒 **Smart Shopping Lists** - Auto-generated from meal plans
 - 👥 **User Management** - Last login tracking & admin controls
 - 🔐 **Multi-Factor Authentication (MFA)** - TOTP-based 2FA for local users with backup codes
+- 🔑 **Passkey Support (WebAuthn/FIDO2)** - Passwordless biometric authentication
+  - Works with Bitwarden, 1Password, and platform authenticators
+  - Database-driven configuration (no environment variables needed)
+  - Configure via Settings → Security tab
+  - Supports multiple passkeys per user
 - 👤 **User Profiles** - Dedicated profile page with account and security settings
 - 📧 **Email Notifications** - Configurable daily/weekly reminders
 - 🤖 **AI-Powered** - Claude AI and OpenAI integration
