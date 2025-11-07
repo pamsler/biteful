@@ -66,13 +66,13 @@ Pre-built images are available on Docker Hub:
 
 **Application Image:**
 ```bash
-docker pull pamsler/biteful:v0.1.6
+docker pull pamsler/biteful:v0.1.7
 docker pull pamsler/biteful:latest
 ```
 
 **Database Image:**
 ```bash
-docker pull pamsler/biteful-db:v0.1.6
+docker pull pamsler/biteful-db:v0.1.7
 docker pull pamsler/biteful-db:latest
 ```
 

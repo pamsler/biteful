@@ -5,6 +5,25 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2025-01-08
+
+### Fixed
+- 📸 **PDF Image Extraction** - Fixed broken image extraction from PDF recipes
+  - Corrected pdfjs-dist import path for version 4.8.69
+  - Changed from `pdfjs-dist/legacy/build/pdf.js` to `pdfjs-dist`
+  - Images now properly extracted and saved with recipes
+- 🌍 **Translation Completeness** - Added missing translations for PDF features
+  - Complete English translations for PDF upload modal
+  - Complete English translations for recipe preview modal
+  - All form labels, buttons, and error messages now fully translated
+  - Proper interpolation support for dynamic values (counts, filenames)
+
+### Changed
+- 🔄 **PDF Re-upload** - Removed duplicate PDF check
+  - PDFs can now be re-uploaded if recipe wasn't saved
+  - More flexible workflow for recipe creation
+  - Simplified error handling
+
 ## [0.1.6] - 2025-01-08
 
 ### Added
@@ -185,6 +204,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor** (0.x.0): New features, backwards compatible
 - **Patch** (0.0.x): Bug fixes, backwards compatible
 
+[0.1.7]: https://github.com/pamsler/biteful/releases/tag/v0.1.7
 [0.1.6]: https://github.com/pamsler/biteful/releases/tag/v0.1.6
 [0.1.5]: https://github.com/pamsler/biteful/releases/tag/v0.1.5
 [0.1.4]: https://github.com/pamsler/biteful/releases/tag/v0.1.4

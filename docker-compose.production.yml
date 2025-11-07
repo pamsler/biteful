@@ -19,7 +19,7 @@ version: '3.8'
 services:
   # PostgreSQL Database
   postgres:
-    image: pamsler/biteful-db:v0.1.6
+    image: pamsler/biteful-db:v0.1.7
     container_name: biteful-db
     restart: unless-stopped
 
@@ -54,7 +54,7 @@ services:
   # Application
   app:
     # Pull from Docker Hub - change version as needed
-    image: pamsler/biteful:v0.1.6
+    image: pamsler/biteful:v0.1.7
     container_name: biteful-app
     restart: unless-stopped
 
