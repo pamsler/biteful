@@ -65,7 +65,7 @@ Default login:
 Pre-built images are available on Docker Hub:
 
 ```bash
-docker pull pamsler/biteful:v0.1.0
+docker pull pamsler/biteful:v0.1.3
 docker pull pamsler/biteful:latest
 ```
 
