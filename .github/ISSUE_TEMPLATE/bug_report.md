@@ -69,4 +69,4 @@ Add any other context about the problem here.
 - [ ] I have checked existing issues to avoid duplicates
 - [ ] I have provided all required environment information
 - [ ] I have included relevant logs
-- [ ] This is not a security vulnerability (use security@amslertec.ch instead)
+- [ ] This is not a security vulnerability (see [Security Policy](../../SECURITY.md) instead)

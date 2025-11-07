@@ -15,11 +15,11 @@ We take the security of Biteful seriously. If you have discovered a security vul
 
 ### How to Report
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+Please report security vulnerabilities through GitHub's private vulnerability reporting:
 
-Instead, please report security vulnerabilities by email to:
+🔒 **[Report a vulnerability](https://github.com/pamsler/biteful/security/advisories/new)**
 
-📧 **support@amslertec.ch**
+Or create a private issue in the repository with the label "security".
 
 Please include the following information in your report:
 

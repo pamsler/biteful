@@ -3,5 +3,4 @@
 
 # Custom funding links
 custom:
-  - "mailto:support@amslertec.ch"
   - "https://hub.docker.com/r/pamsler/biteful"

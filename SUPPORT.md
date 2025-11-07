@@ -38,7 +38,6 @@ Please see our [Security Policy](SECURITY.md) for responsible disclosure.
 
 For general questions, support, or issues:
 
-- 📧 Email: **support@amslertec.ch**
 - 🐛 GitHub Issues: [github.com/pamsler/biteful/issues](https://github.com/pamsler/biteful/issues)
 - 🐳 Docker Hub: [hub.docker.com/r/pamsler/biteful](https://hub.docker.com/r/pamsler/biteful)
 
@@ -66,7 +65,7 @@ DATABASE_URL=postgresql://mealuser:yourpassword@biteful-db:5432/mealplanner
 
 If you're locked out of your account with MFA:
 1. Check if you have backup codes
-2. Contact support at support@amslertec.ch with proof of account ownership
+2. Create a GitHub issue with proof of account ownership
 
 ### Email notifications not working
 
@@ -124,6 +123,6 @@ docker stats biteful-app
 
 ---
 
-**Need immediate help?** Email us at support@amslertec.ch
+**Need help?** Open an issue on [GitHub](https://github.com/pamsler/biteful/issues)
 
 © 2025 AmslerTec - Made with ❤️ for better meal planning
