@@ -5,6 +5,14 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.8] - 2025-11-08
+
+### Fixed
+- 🌍 **Activity Log Translations** - Product names within shopping activity logs now respect the current UI language, matching the shopping list view.
+
+### Changed
+- 🖥️ **Desktop Layout Width** - Week Planner, Shopping List, Activity Logs, Settings, and Profile pages now use a full-width desktop layout while keeping the mobile experience unchanged.
+
 ## [0.1.7] - 2025-01-08
 
 ### Fixed
