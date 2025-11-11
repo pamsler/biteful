@@ -5,10 +5,69 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.9] - 2025-11-11
+
+### Added
+- 🇨🇭 **Swiss Product Catalog (SQLite)** - 153 pre-loaded products from major Swiss retailers
+  - Products from Migros, Coop, Lidl, and Denner
+  - Separate SQLite database (`/app/data/products.db`) for product catalog
+  - Full-text search (FTS5) for fast product lookup
+  - 10 product categories with icons and colors
+  - Popularity-based ranking
+- 🔍 **Hybrid Search System** - Intelligent product search combining multiple sources
+  - Searches SQLite catalog first (predefined products)
+  - Then searches PostgreSQL (custom user products)
+  - Automatic deduplication of results
+  - Cached results for better performance (30-minute TTL)
+- 🕐 **Smart "Recently Used" Tracking** - Improved shopping list item tracking
+  - Now shows only products that were searched, added, and checked off
+  - Added `completed_at` timestamp to `shopping_list_items` table
+  - Migration to backfill timestamps for existing checked items
+  - Database migration: `002-add-completed-at.js`
+- 🧹 **Automatic Weekly Cleanup** - Scheduled maintenance for shopping data
+  - Cron job runs every Sunday at midnight (CET/CEST)
+  - Automatically removes checked items older than 7 days
+  - Keeps database clean and performant
+- ➕ **Add Products From Search Results** - Enhanced UI for custom product creation
+  - "Add Product" buttons now visible even when search results are found
+  - Two options: Quick add (no icon) or Full add (with icon & category)
+  - Added translation key `notInResults` for German and English
+
+### Changed
+- `/api/ingredients/frequent` endpoint now queries based on `completed_at` timestamp
+- Removed user_id filter from frequent items (shopping lists are shared)
+- Updated cron service to include cleanup job
+- Search results now show combined catalog + custom products
+
+### Database Changes
+- Added `completed_at TIMESTAMP WITH TIME ZONE` column to `shopping_list_items`
+- Migration automatically backfills timestamps for existing checked items
+- New SQLite database for product catalog at `/app/data/products.db`
+
+### Infrastructure
+- New SQLite product catalog database alongside training database
+- Optimized search performance with FTS5 indexes
+- Improved caching strategy for search results
+
 ## [0.1.8] - 2025-11-08
+
+### Added
+- 📝 **Manual Recipe Modal** - Convert manual recipe creation from separate page to modal
+  - Modal-based workflow matching PDF upload and preview modals
+  - Full German and English translation support
+  - Mobile-responsive design
+  - Improved user experience with backdrop and focus management
+- 🗑️ **Admin Activity Log Management** - Admin-only function to clear all activity logs
+  - "Clear All" button visible only to administrators
+  - Confirmation dialog before deletion
+  - Toast notifications for success/error feedback
+  - Complete German and English translations
 
 ### Fixed
 - 🌍 **Activity Log Translations** - Product names within shopping activity logs now respect the current UI language, matching the shopping list view.
+- 🔒 **Activity Log Privacy** - Removed profile picture upload/delete logs from activity tracking
+  - Profile picture changes are now private
+  - No activity logs created for profile picture uploads or deletions
 
 ### Changed
 - 🖥️ **Desktop Layout Width** - Week Planner, Shopping List, Activity Logs, Settings, and Profile pages now use a full-width desktop layout while keeping the mobile experience unchanged.

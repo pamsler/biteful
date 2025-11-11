@@ -66,13 +66,13 @@ Pre-built images are available on Docker Hub:
 
 **Application Image:**
 ```bash
-docker pull pamsler/biteful:v0.1.8
+docker pull pamsler/biteful:v0.1.9
 docker pull pamsler/biteful:latest
 ```
 
 **Database Image:**
 ```bash
-docker pull pamsler/biteful-db:v0.1.8
+docker pull pamsler/biteful-db:v0.1.9
 docker pull pamsler/biteful-db:latest
 ```
 
@@ -131,7 +131,10 @@ Expected response: `{"status":"ok"}`
 ## ✨ Key Features
 
 - 📅 **Weekly Meal Planning** - Plan all meals for the week
-- 🛒 **Smart Shopping Lists** - Auto-generated from meal plans
+- 🛒 **Smart Shopping Lists** - Auto-generated from meal plans with intelligent product suggestions
+- 🇨🇭 **Swiss Product Catalog** - 153 pre-loaded products from Migros, Coop, Lidl, Denner
+- 🔍 **Hybrid Search** - Lightning-fast product search combining SQLite catalog with custom products
+- 🕐 **Smart Recently Used** - Track completed shopping items with automatic 7-day cleanup
 - 👥 **User Management** - Last login tracking & admin controls
 - 🔐 **Multi-Factor Authentication (MFA)** - TOTP-based 2FA for local users with backup codes
 - 🔑 **Passkey Support (WebAuthn/FIDO2)** - Passwordless biometric authentication
