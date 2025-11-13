@@ -5,6 +5,20 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.14] - 2025-01-13
+
+### Fixed
+- 🐛 **Catalog Product Error** - Fixed error when adding products from SQLite catalog to shopping list
+  - Resolves error: `invalid input syntax for type integer: "catalog_59"`
+  - Now correctly handles catalog product IDs (e.g., "catalog_59") that start with "catalog_"
+  - Catalog products are now created as new ingredients in PostgreSQL when added
+  - No longer tries to use catalog IDs as PostgreSQL integer IDs
+
+### Technical Details
+- Added check for catalog product IDs in shopping route
+- If `ingredient_id` starts with "catalog_", treat as new product (not existing PostgreSQL ID)
+- Falls back to ingredient name-based lookup/creation for catalog products
+
 ## [0.1.13] - 2025-01-13
 
 ### Improved
