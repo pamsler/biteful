@@ -66,13 +66,13 @@ Pre-built images are available on Docker Hub:
 
 **Application Image:**
 ```bash
-docker pull pamsler/biteful:v0.1.9
+docker pull pamsler/biteful:v0.1.10
 docker pull pamsler/biteful:latest
 ```
 
 **Database Image:**
 ```bash
-docker pull pamsler/biteful-db:v0.1.9
+docker pull pamsler/biteful-db:v0.1.10
 docker pull pamsler/biteful-db:latest
 ```
 
@@ -135,6 +135,10 @@ Expected response: `{"status":"ok"}`
 - 🇨🇭 **Swiss Product Catalog** - 153 pre-loaded products from Migros, Coop, Lidl, Denner
 - 🔍 **Hybrid Search** - Lightning-fast product search combining SQLite catalog with custom products
 - 🕐 **Smart Recently Used** - Track completed shopping items with automatic 7-day cleanup
+- 📱 **Push Notifications** - Real-time browser notifications for shopping list changes (add/remove items)
+- 🔔 **User-Configurable Notifications** - Per-user notification settings in profile (enable/disable, test notifications)
+- 🌍 **Language-Specific Notifications** - Each user receives notifications in their preferred language (German/English)
+- 🔄 **Live Shopping List Updates** - Silent auto-refresh every 5 seconds, no manual reload needed
 - 👥 **User Management** - Last login tracking & admin controls
 - 🔐 **Multi-Factor Authentication (MFA)** - TOTP-based 2FA for local users with backup codes
 - 🔑 **Passkey Support (WebAuthn/FIDO2)** - Passwordless biometric authentication
@@ -142,7 +146,7 @@ Expected response: `{"status":"ok"}`
   - Database-driven configuration (no environment variables needed)
   - Configure via Settings → Security tab
   - Supports multiple passkeys per user
-- 👤 **User Profiles** - Dedicated profile page with account and security settings
+- 👤 **User Profiles** - Dedicated profile page with account, security, and notification settings
 - 🖼️ **Profile Pictures** - Upload custom profile pictures (local users) or auto-sync from Microsoft Entra ID (SSO users)
 - 📧 **Email Notifications** - Configurable daily/weekly reminders
 - 🤖 **AI-Powered** - Claude AI and OpenAI integration
@@ -157,9 +161,10 @@ Biteful supports multiple languages out of the box:
 
 **Features:**
 - Automatic language detection based on browser settings
-- Language toggle in the sidebar with flag icons
-- User preference saved in browser (localStorage)
+- Language toggle in the sidebar with SVG flag icons (consistent rendering on all devices)
+- User preference saved in database and synced across devices
 - Instant language switching without page reload
+- Language-specific push notifications - each user receives notifications in their preferred language
 - Easy to extend with additional languages
 
 Users can switch languages at any time using the language toggle button at the bottom of the sidebar.
