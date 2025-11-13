@@ -5,6 +5,19 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.11] - 2025-01-13
+
+### Fixed
+- 🐛 **Missing Database Migration** - Fixed missing migration for `preferred_language` column
+  - Added migration `004-add-preferred-language.js`
+  - Existing production databases now properly receive the `preferred_language` column
+  - Resolves error: `column "preferred_language" does not exist`
+  - All existing users get default language 'de' (German)
+
+### Database Changes
+- Migration `004-add-preferred-language.js` adds `preferred_language VARCHAR(10) DEFAULT 'de'` to `users` table
+- Automatic update for existing users with default language
+
 ## [0.1.10] - 2025-01-13
 
 ### Added
