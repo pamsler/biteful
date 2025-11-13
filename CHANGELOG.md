@@ -5,6 +5,20 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.12] - 2025-01-13
+
+### Fixed
+- 🐛 **Push Notifications Error** - Fixed error with non-existent `push_global_settings` table
+  - Removed dependency on global push settings table
+  - Push notifications now use per-user settings only (from `push_subscriptions` table)
+  - Resolves error: `relation "push_global_settings" does not exist`
+  - Cleaner notification architecture with per-user control
+
+### Changed
+- Removed `getGlobalSettings()` function from PushService
+- Push notifications now respect only per-user preferences
+- No global notification toggle needed anymore
+
 ## [0.1.11] - 2025-01-13
 
 ### Fixed
