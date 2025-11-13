@@ -27,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Search API**: Added `catalogCategoryId` to SQLite query results
 - **Frontend**: Extended `handleAddItem` to accept and pass `categoryId` and `icon`
 - **Backend**: Shopping route now accepts `category_id` and `icon` from request body
-- **Backend**: Uses provided `category_id` and `icon` when creating new ingredients from catalog
+- **Backend**: Implemented `mapCatalogCategoryId()` function to translate SQLite category IDs to PostgreSQL category IDs
+- **Backend**: Category mapping ensures products land in correct categories (e.g., Kiwi: SQLite ID 4 → PostgreSQL ID 1)
 
 ## [0.1.13] - 2025-01-13
 
