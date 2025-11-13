@@ -5,6 +5,22 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.15] - 2025-01-13
+
+### Fixed
+- 🎯 **Catalog Priority Fix** - Catalog products now always take precedence over custom products
+  - Fixed issue where existing PostgreSQL products prevented catalog products from being used
+  - Search now always returns catalog products when available, even if duplicate exists in PostgreSQL
+  - When adding catalog product that exists in PostgreSQL, it updates with correct catalog data
+  - **Example**: "Migros Kiwi" now correctly uses catalog data (Category: Obst & Gemüse, Icon: 🥝)
+  - Prevents catalog products from landing in wrong categories (e.g., "Sonstiges")
+
+### Technical Details
+- **Search Logic**: Catalog products added first, PostgreSQL duplicates skipped
+- **Category Mapping**: SQLite category IDs correctly mapped to PostgreSQL (e.g., 4 → 1)
+- **Update Logic**: Existing ingredients updated with catalog icon and category when catalog product is added
+- **Debug Logging**: Added comprehensive logging for troubleshooting catalog product flow
+
 ## [0.1.14] - 2025-01-13
 
 ### Fixed
