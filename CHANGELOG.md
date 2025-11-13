@@ -13,11 +13,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Now correctly handles catalog product IDs (e.g., "catalog_59") that start with "catalog_"
   - Catalog products are now created as new ingredients in PostgreSQL when added
   - No longer tries to use catalog IDs as PostgreSQL integer IDs
+- 🏷️ **Catalog Category & Icon Preservation** - Catalog products now retain their correct category and icon
+  - Products from catalog (e.g., "Migros Kiwi") now keep their original category (Früchte & Gemüse) instead of "Sonstiges"
+  - Product icons from catalog are now preserved when added to shopping list
+  - Search results now include `category_id` from SQLite catalog
+  - Frontend passes `category_id` and `icon` to backend when adding catalog products
+  - Backend uses provided values instead of auto-detection
 
 ### Technical Details
 - Added check for catalog product IDs in shopping route
 - If `ingredient_id` starts with "catalog_", treat as new product (not existing PostgreSQL ID)
 - Falls back to ingredient name-based lookup/creation for catalog products
+- **Search API**: Added `catalogCategoryId` to SQLite query results
+- **Frontend**: Extended `handleAddItem` to accept and pass `categoryId` and `icon`
+- **Backend**: Shopping route now accepts `category_id` and `icon` from request body
+- **Backend**: Uses provided `category_id` and `icon` when creating new ingredients from catalog
 
 ## [0.1.13] - 2025-01-13
 
