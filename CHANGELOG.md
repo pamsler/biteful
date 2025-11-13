@@ -5,6 +5,60 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.10] - 2025-01-13
+
+### Added
+- 📱 **Push Notifications for Shopping List** - Real-time notifications for shopping list changes
+  - Notifications when items are added to the shopping list
+  - Notifications when items are removed from the shopping list
+  - Browser-based push notifications using Web Push API
+  - Service Worker integration for background notifications
+  - VAPID keys stored securely in database
+- 🔔 **User-Configurable Notifications** - Individual notification settings in user profile
+  - New "Notifications" tab in Profile page
+  - Enable/disable notifications with browser permission request
+  - Master toggle for all notifications
+  - Individual toggles for "Add" and "Remove" notifications
+  - Test notification button
+  - Available for all users (both SSO and local)
+  - Settings removed from Admin area (now per-user)
+- 🌍 **Language-Specific Notifications** - Notifications in user's preferred language
+  - Each user receives notifications in their own language (German/English)
+  - Language preference stored in database (`users.preferred_language`)
+  - Automatic language detection and sync on login
+  - Sidebar language selector updates user preference
+- 🔄 **Live Shopping List Updates** - Auto-refresh without manual reload
+  - Silent 5-second polling for shopping list changes
+  - Updates happen in background without loading spinner
+  - Pauses when browser tab is hidden (saves resources)
+  - Uses Visibility API for smart polling
+  - Custom `useShoppingListSync` React hook
+- 🚩 **Fixed Login Page Flags** - Consistent flag rendering across all devices
+  - Replaced emoji flags with SVG flags
+  - German flag (🇩🇪 → SVG)
+  - British flag (🇬🇧 → SVG)
+  - Consistent rendering on all browsers and devices
+
+### Changed
+- Profile page now has 3 tabs: Account, Security, Notifications
+- Settings page no longer includes push notification configuration
+- Language changes in sidebar now update database preference
+- Shopping list uses silent background refresh instead of manual reload
+- Push notifications exclude the user who performed the action
+
+### Technical Details
+- New database column: `users.preferred_language` (varchar)
+- Push notification preferences per user in `push_subscriptions` table
+- Frontend: `/var/docker/container/meal-planner/frontend/src/hooks/useShoppingListSync.ts`
+- Backend: `/var/docker/container/meal-planner/backend/src/services/pushService.js`
+- Profile component: Added `NotificationSettings` component
+- Shopping API: Push notifications on add/remove/toggle operations
+
+### API Changes
+- `POST /api/users/me/language` - Update user's preferred language
+- `GET /api/users/me` - Returns user with `preferred_language`
+- Push notification endpoints already existed, now used in Profile
+
 ## [0.1.9] - 2025-11-11
 
 ### Added
