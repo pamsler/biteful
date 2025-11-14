@@ -5,6 +5,30 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.17] - 2025-11-14
+
+### Added
+- 🌍 **Full English Product Translations** - All 262 catalog products now fully translated
+  - Product names automatically display in user's preferred language (German/English)
+  - Search API accepts language parameter for dynamic translation
+  - Examples:
+    - German: "Bananen (Lidl)", "Vollmilch (Migros)", "Kartoffeln (Coop)"
+    - English: "Bananas (Lidl)", "Whole Milk (Migros)", "Potatoes (Coop)"
+
+### Improved
+- 🔍 **Language-Aware Search** - Search results now respect user's language preference
+  - Backend automatically serves correct language based on user settings
+  - FTS5 full-text search indexes both German and English names
+  - Categories also translated (Getränke/Beverages, Milchprodukte/Dairy Products, etc.)
+
+### Technical Details
+- **Database Schema**: Added `name_en` field to products table
+- **Modified Files**:
+  - `backend/src/db/products-catalog.js` - Added English translations for all 262 products
+  - `backend/src/routes/ingredients.js` - Language-aware search queries
+- **API Enhancement**: `/api/ingredients/search?language=en` parameter support
+- **No Breaking Changes**: Fully backward compatible, defaults to German
+
 ## [0.1.16] - 2025-11-14
 
 ### Improved
