@@ -5,6 +5,36 @@ All notable changes to Biteful will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.16] - 2025-11-14
+
+### Improved
+- 📦 **Unified Product Naming** - All 262 catalog products now follow consistent naming convention
+  - **Old Format**: "Migros Cola", "Coop Apfelsaft", "Lidl Chips"
+  - **New Format**: "Cola (Migros)", "Apfelsaft (Coop)", "Chips (Lidl)"
+  - Product name comes first for better search experience and readability
+  - Catalog covers 4 stores: Migros (138), Coop (56), Lidl (43), Denner (25)
+
+- 🌍 **English Category Translations** - All 10 product categories now fully translated
+  - Getränke / Beverages
+  - Milchprodukte / Dairy Products
+  - Backwaren / Bakery
+  - Obst / Fruits
+  - Gemüse / Vegetables
+  - Fleisch & Fisch / Meat & Fish
+  - Süßigkeiten / Sweets
+  - Pasta & Reis / Pasta & Rice
+  - Gewürze & Saucen / Spices & Sauces
+  - Sonstiges / Other
+
+- 🎨 **Cleaner UI** - Removed country flag (🇨🇭) from product listings for simplified interface
+
+### Technical Details
+- **Modified Files**:
+  - `backend/src/db/products-catalog.js` - Updated all 262 product names
+  - `backend/src/routes/ingredients.js` - Removed CH flag from search results
+- **Database**: SQLite catalog automatically reseeds on first startup
+- **No Breaking Changes**: Fully backward compatible
+
 ## [0.1.15] - 2025-01-13
 
 ### Fixed
